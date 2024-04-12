@@ -189,7 +189,7 @@ BEE_TEMPLATE = <<-JS
 
   function typeAll(words) {
     for(i = 0; i < words.length; i++) {
-      setTimeout(typeWord, i * 1000, words[i]);
+      setTimeout(typeWord, i * 500, words[i]);
     }
   }
 
