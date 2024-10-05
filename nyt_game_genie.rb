@@ -3,6 +3,8 @@
 require 'optparse'
 
 def main
+  ARGV << '-h' if ARGV.empty?
+
   OptionParser.new do |opts|
     # opts.summary_width = 20
     opts.banner = "Usage: nyt_game_genie.rb [options]"
@@ -189,7 +191,7 @@ BEE_TEMPLATE = <<-JS
 
   function typeAll(words) {
     for(i = 0; i < words.length; i++) {
-      setTimeout(typeWord, i * 500, words[i]);
+      setTimeout(typeWord, i * 1100, words[i]);
     }
   }
 
