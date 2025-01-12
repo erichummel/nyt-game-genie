@@ -6,7 +6,6 @@ def main
   ARGV << '-h' if ARGV.empty?
 
   OptionParser.new do |opts|
-    # opts.summary_width = 20
     opts.banner = "Usage: nyt_game_genie.rb [options]"
 
     opts.on("-d", "--dictionary=<path to file>", "path to newline-delimited dictionary") do |opt|
@@ -229,7 +228,17 @@ def words_starting_with(substring, words)
   words.filter { |w| w =~ /^#{substring}/ }
 end
 
+def overlaps(a, b)
+  results = a.map do |char|
+    char if b.include?(char)
+  end.compact
+  !results.empty? ? results.join(", ") : nil
+end
+
 def wordle_words(not_there = [],  must_have = [], regexes = [ /./, /./, /./, /./, /./ ])
+  conflicts = overlaps(not_there, must_have)
+  puts "conflicts: #{conflicts}" if conflicts
+
   five_letter_words.
     reject{|w| w=~ (not_there && not_there.size > 0 ? /[#{not_there.join}]/ : /[^\s\S]/) }.
     select{|w|
